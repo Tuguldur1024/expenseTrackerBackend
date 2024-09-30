@@ -1,6 +1,6 @@
 import { sql } from "../../database";
 
-export const getUsers = async (request, response) => {
+export const getUser = async (request, response) => {
   const { id } = request.body;
   try {
     const user = await sql`SELECT * FROM user where id=${id}`;
