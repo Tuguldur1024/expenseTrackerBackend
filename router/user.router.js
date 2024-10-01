@@ -6,7 +6,7 @@ import { getUser } from "../controller/get/getUserById";
 import { updateUser } from "../controller/put/updateUser";
 import { addUser } from "../controller/post/addUser";
 
-const userRouter = express.Router();
+export const userRouter = express.Router();
 
 userRouter
   .get("/", getUsers)

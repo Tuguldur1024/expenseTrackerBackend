@@ -2,7 +2,6 @@ import postgres from "postgres";
 require("dotenv").config();
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-
 export const sql = postgres({
   host: PGHOST,
   database: PGDATABASE,
