@@ -6,6 +6,6 @@ export const getTransaction = async (request, response) => {
     const transaction = await sql`SELECT * FROM transactions where id=${id}`;
     response.status(200).json({ transaction: transaction });
   } catch (error) {
-    response.status(400).json({ message: "bad request" });
+    response.status(400).json({ message: error });
   }
 };

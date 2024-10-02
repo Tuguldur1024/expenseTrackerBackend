@@ -1,0 +1,13 @@
+import { sql } from "../../database";
+
+export const signIn = async (request, response) => {
+  const { email, password } = request.body;
+  try {
+    const user =
+      await sql`SELECT * FROM users WHERE email=${email} AND password=${password}`;
+
+    response.status(200).json({ user: user });
+  } catch (error) {
+    response.status(400).json({ error: error });
+  }
+};
