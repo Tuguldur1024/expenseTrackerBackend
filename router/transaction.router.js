@@ -4,12 +4,13 @@ import { getTransaction } from "../controller/get/getTransactionById";
 import { daleteTransaction } from "../controller/delete/deleteTransaction";
 import { addTransaction } from "../controller/post/addTransaction";
 import { updateTransaction } from "../controller/put/updateTransaction";
+import { getTransactionByUserId } from "../controller/get/getTransactionByUserID";
 
 export const transactionRouter = express.Router();
 
 transactionRouter
   .get("/", getTransactions)
-  .get("/:id", getTransaction)
   .delete("/", daleteTransaction)
   .post("/", addTransaction)
-  .put("/", updateTransaction);
+  .put("/", updateTransaction)
+  .post("/byuserid", getTransactionByUserId);

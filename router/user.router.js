@@ -15,4 +15,4 @@ userRouter
   .delete("/", deleteUser)
   .put("/", updateUser)
   .post("/", addUser)
-  .get("/signin", signIn);
+  .post("/signIn", signIn);
