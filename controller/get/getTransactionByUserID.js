@@ -2,7 +2,6 @@ import { sql } from "../../database";
 
 export const getTransactionByUserId = async (request, response) => {
   const { user_id } = request.body;
-  console.log(request.body);
   try {
     const myTransactions =
       await sql`Select transaction_type, transactions.created_at, amount, categories.name
