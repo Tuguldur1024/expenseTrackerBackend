@@ -1,6 +1,6 @@
 import { sql } from "../../database";
 
-export const getCategories = async (_request, response) => {
+export const getCategories = async (request, response) => {
   try {
     const categories = await sql`SELECT * FROM categories`;
     response.status(200).json({ categories: categories });
