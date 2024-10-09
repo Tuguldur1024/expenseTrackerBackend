@@ -7,6 +7,7 @@ import { updateTransaction } from "../controller/put/updateTransaction";
 import { getTransactionByUserId } from "../controller/get/getTransactionByUserID";
 import { findTotalExpense } from "../controller/post/findTotalExpense";
 import { findTotalIncome } from "../controller/post/findTotalIncome";
+import { filterCategories } from "../controller/post/filterCategories";
 
 export const transactionRouter = express.Router();
 
@@ -17,4 +18,5 @@ transactionRouter
   .put("/", updateTransaction)
   .post("/byuserid", getTransactionByUserId)
   .post("/getExpense", findTotalExpense)
-  .post("/getIncome", findTotalIncome);
+  .post("/getIncome", findTotalIncome)
+  .post("/filterCategories", filterCategories);
