@@ -8,6 +8,7 @@ import { getTransactionByUserId } from "../controller/get/getTransactionByUserID
 import { findTotalExpense } from "../controller/post/findTotalExpense";
 import { findTotalIncome } from "../controller/post/findTotalIncome";
 import { filterCategories } from "../controller/post/filterCategories";
+import { getAscendingTransactions } from "../controller/post/getAscendingTransactions";
 
 export const transactionRouter = express.Router();
 
@@ -19,4 +20,5 @@ transactionRouter
   .post("/byuserid", getTransactionByUserId)
   .post("/getExpense", findTotalExpense)
   .post("/getIncome", findTotalIncome)
-  .post("/filterCategories", filterCategories);
+  .post("/filterCategories", filterCategories)
+  .post("/getAscendingTransactions", getAscendingTransactions);

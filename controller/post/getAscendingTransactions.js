@@ -1,6 +1,6 @@
 import { sql } from "../../database";
 
-export const getTransactionByUserId = async (request, response) => {
+export const getAscendingTransactions = async (request, response) => {
   const { user_id, filter, search } = request.body;
   console.log(request.body);
 
@@ -16,10 +16,14 @@ export const getTransactionByUserId = async (request, response) => {
   } else if (filter === "Expense") {
     query = sql`${query} AND transactions.transaction_type = 'EXP'`;
   }
-  query = sql`${query} ORDER BY transactions.created_at DESC`;
+  query = sql`${query} ORDER BY transactions.created_at ASC`;
 
   try {
     const myTransactions = await query;
+    const filtered = myTransactions.filter((transaction) => {
+      transaction.name.includes(search);
+    });
+    console.log(filtered);
     response.status(200).json({ transactions: myTransactions });
   } catch (error) {
     console.error("Error executing query:", error);
