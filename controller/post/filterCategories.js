@@ -4,7 +4,7 @@ export const filterCategories = async (request, response) => {
   const { categories, userid } = request.body;
   console.log(request.body);
   try {
-    const transactions = filteredTransactions(userid);
+    const transactions = filteredTransactions(categories, userid);
     response.status(200).json({ transactions });
   } catch (error) {
     response.status(400).json({ message: error });
