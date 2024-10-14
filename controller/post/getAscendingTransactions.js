@@ -19,6 +19,12 @@ export const getAscendingTransactions = async (request, response) => {
 
   try {
     const myTransactions = await query;
+    const filteredTransactions =
+      categories && categories.length > 0
+        ? myTransactions.filter((oneTrans) =>
+            categories.some((category) => oneTrans.name === category.name)
+          )
+        : myTransactions;
     if (search) {
       const filtered = myTransactions.filter((transaction) => {
         return transaction.name.includes(search);

@@ -38,6 +38,6 @@ export const getTransactionByUserId = async (request, response) => {
     }
   } catch (error) {
     console.error("Error executing query:", error);
-    response.status(400).json({ message: error.message });
+    response.status(400).json({ message: error });
   }
 };
