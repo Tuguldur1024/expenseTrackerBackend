@@ -18,8 +18,6 @@ export const filteredTransactions = async (userid, categories) => {
             INNER JOIN users ON users.id = transactions.user_id
             INNER JOIN categories ON categories.id = transactions.category_id
             WHERE transactions.user_id = ${userid} `;
-  const filteredTransactions = userTransaction.filter((oneTrans) =>
-    categories.some((category) => oneTrans.name === category.name)
-  );
+
   return filteredTransactions;
 };

@@ -20,5 +20,4 @@ transactionRouter
   .post("/byuserid", getTransactionByUserId)
   .post("/getExpense", findTotalExpense)
   .post("/getIncome", findTotalIncome)
-  .post("/filterCategories", filterCategories)
   .post("/getAscendingTransactions", getAscendingTransactions);

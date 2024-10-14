@@ -1,8 +1,7 @@
 import { sql } from "../../database";
 
 export const getAscendingTransactions = async (request, response) => {
-  const { user_id, filter, search } = request.body;
-  console.log(request.body);
+  const { user_id, filter, search, categories } = request.body;
 
   let query = sql`
     SELECT transaction_type, transactions.created_at, amount, categories.name
@@ -20,11 +19,15 @@ export const getAscendingTransactions = async (request, response) => {
 
   try {
     const myTransactions = await query;
-    const filtered = myTransactions.filter((transaction) => {
-      transaction.name.includes(search);
-    });
-    console.log(filtered);
-    response.status(200).json({ transactions: myTransactions });
+    if (search) {
+      const filtered = myTransactions.filter((transaction) => {
+        return transaction.name.includes(search);
+      });
+      console.log(filtered);
+      response.status(200).json({ transactions: filtered });
+    } else {
+      response.status(200).json({ transactions: myTransactions });
+    }
   } catch (error) {
     console.error("Error executing query:", error);
     response.status(400).json({ message: error.message });

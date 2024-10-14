@@ -1,8 +1,7 @@
 import { sql } from "../../database";
 
 export const getTransactionByUserId = async (request, response) => {
-  const { user_id, filter, search } = request.body;
-  console.log(request.body);
+  const { user_id, filter, search, categories } = request.body;
 
   let query = sql`
     SELECT transaction_type, transactions.created_at, amount, categories.name
@@ -20,7 +19,23 @@ export const getTransactionByUserId = async (request, response) => {
 
   try {
     const myTransactions = await query;
-    response.status(200).json({ transactions: myTransactions });
+    const filteredTransactions =
+      categories && categories.length > 0
+        ? myTransactions.filter((oneTrans) =>
+            categories.some((category) => oneTrans.name === category.name)
+          )
+        : myTransactions;
+
+    if (search) {
+      const searchedTransactions = filteredTransactions.filter(
+        (oneTransaction) => {
+          return oneTransaction.name.includes(search);
+        }
+      );
+      response.status(200).json({ transactions: searchedTransactions });
+    } else {
+      response.status(200).json({ transactions: filteredTransactions });
+    }
   } catch (error) {
     console.error("Error executing query:", error);
     response.status(400).json({ message: error.message });
