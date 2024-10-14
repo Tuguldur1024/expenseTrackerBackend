@@ -3,6 +3,8 @@ import { sql } from "../../database";
 export const getAscendingTransactions = async (request, response) => {
   const { user_id, filter, search, categories } = request.body;
 
+  console.log(request.body);
+
   let query = sql`
     SELECT transaction_type, transactions.created_at, amount, categories.name
     FROM transactions 
