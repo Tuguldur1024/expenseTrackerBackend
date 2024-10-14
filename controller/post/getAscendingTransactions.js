@@ -26,7 +26,7 @@ export const getAscendingTransactions = async (request, response) => {
           )
         : myTransactions;
     if (search) {
-      const filtered = myTransactions.filter((transaction) => {
+      const filtered = filteredTransactions.filter((transaction) => {
         return transaction.name.includes(search);
       });
       console.log(filtered);
