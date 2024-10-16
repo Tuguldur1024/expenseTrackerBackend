@@ -4,7 +4,7 @@ export const getTransactionByUserId = async (request, response) => {
   const { user_id, filter, search, categories } = request.body;
 
   let query = sql`
-    SELECT transaction_type, transactions.created_at, amount, categories.name
+    SELECT transactions.id, transaction_type, transactions.created_at, amount, categories.name
     FROM transactions 
     INNER JOIN users ON users.id = transactions.user_id
     INNER JOIN categories ON categories.id = transactions.category_id
