@@ -9,6 +9,10 @@ import { findTotalExpense } from "../controller/post/findTotalExpense";
 import { findTotalIncome } from "../controller/post/findTotalIncome";
 import { filterCategories } from "../controller/post/filterCategories";
 import { getAscendingTransactions } from "../controller/post/getAscendingTransactions";
+import {
+  getSumByCategoriesIncome,
+  getSumByCategoriesExpense,
+} from "../controller/post/getSumByCategories";
 
 export const transactionRouter = express.Router();
 
@@ -20,4 +24,6 @@ transactionRouter
   .post("/byuserid", getTransactionByUserId)
   .post("/getExpense", findTotalExpense)
   .post("/getIncome", findTotalIncome)
-  .post("/getAscendingTransactions", getAscendingTransactions);
+  .post("/getAscendingTransactions", getAscendingTransactions)
+  .post("/categoryExpense", getSumByCategoriesExpense)
+  .post("/categoryIncome", getSumByCategoriesIncome);
