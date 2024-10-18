@@ -3,10 +3,8 @@ import { sql } from "../../database";
 export const getAscendingTransactions = async (request, response) => {
   const { user_id, filter, search, categories } = request.body;
 
-  console.log(request.body);
-
   let query = sql`
-    SELECT transaction_type, transactions.created_at, amount, categories.name
+    SELECT transactions.id, transaction_type, transactions.created_at, amount, categories.name
     FROM transactions 
     INNER JOIN users ON users.id = transactions.user_id
     INNER JOIN categories ON categories.id = transactions.category_id
@@ -27,17 +25,19 @@ export const getAscendingTransactions = async (request, response) => {
             categories.some((category) => oneTrans.name === category.name)
           )
         : myTransactions;
+
     if (search) {
-      const filtered = filteredTransactions.filter((transaction) => {
-        return transaction.name.includes(search);
-      });
-      console.log(filtered);
-      response.status(200).json({ transactions: filtered });
+      const searchedTransactions = filteredTransactions.filter(
+        (oneTransaction) => {
+          return oneTransaction.name.includes(search);
+        }
+      );
+      response.status(200).json({ transactions: searchedTransactions });
     } else {
-      response.status(200).json({ transactions: myTransactions });
+      response.status(200).json({ transactions: filteredTransactions });
     }
   } catch (error) {
     console.error("Error executing query:", error);
-    response.status(400).json({ message: error.message });
+    response.status(400).json({ message: error });
   }
 };
